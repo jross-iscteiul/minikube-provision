@@ -12,7 +12,7 @@ sh provision_minikube_3_nodes.sh
 And then go get a coffee because this takes a while. This provisions 3 nodes: one control-plane and two workers.
 <br>
 
-![provisioning 3 nodes](image.png)
+![provisioning 3 nodes](images/image.png)
 
 <br>    
 <br>
@@ -43,11 +43,11 @@ In this image I provisioned 3 more:
 
 <br>
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 # 3- Clean up
 ```bash
 minikube delete --all
 ```
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
