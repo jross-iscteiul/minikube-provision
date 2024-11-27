@@ -45,6 +45,15 @@ In this image I provisioned 3 more:
 
 ![alt text](images/image-2.png)
 
+# 3 - Dashboard
+Run this command to access the dashboard
+```
+minikube dashboard
+```
+![alt text](images/image-4.png)
+
+![alt text](images/image-5.png)
+
 # 3- Clean up
 ```bash
 minikube delete --all
