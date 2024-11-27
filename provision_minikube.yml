@@ -1,0 +1,59 @@
+---
+- name: Install Minikube on Linux
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install required dependencies
+      apt:
+        name:
+          - curl
+          - apt-transport-https
+          - ca-certificates
+          - conntrack
+          - socat
+          - jq
+          - ebtables
+          - git
+        state: present
+
+    # Downloading kubectl (useful later)
+    - name: Download kubectl
+      get_url:
+        url: https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+    # Downloading and installing Docker
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    
+    # Downloading and installing Minikube
+    - name: Download Minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: '0755'
+
+    # Verifying Minikube installation
+    - name: Verify Minikube version
+      shell: minikube version
+      register: minikube_version
+      ignore_errors: yes
+
+    - name: Display Minikube version
+      debug:
+        msg: "Minikube version: {{ minikube_version.stdout }}"
+
